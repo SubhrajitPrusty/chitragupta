@@ -48,11 +48,9 @@ def main():
     site = pywikibot.Site()
     page = pywikibot.Page(site, u'MetaKGP_Github_Contributors')
     text = "<b>List of contributors on Github:</b><br/><br/>"
-    i = 1
-    for name in consolidated_list:
-        url = "https://github.com/"+name
-        text += str(i)+". ["+url+" "+name+"] <br/>"
-        i += 1
+    for iter, github_username in enumerate(consolidated_list):
+        url = "https://github.com/%s" % github_username
+        text += "%s. [%s %s] <br>" % (iter, url, github_username)
     page.text = text
     page.save(u'Update list of contributors')
 
