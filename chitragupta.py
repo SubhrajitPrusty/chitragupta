@@ -45,12 +45,21 @@ def get_all_repos():
 
 def main():
     contributors, consolidated_list = get_all_repos()
-    site = pywikibot.Site()
-    page = pywikibot.Page(site, u'MetaKGP_Github_Contributors')
+
+    # Build the markup for the page
     text = "<b>List of contributors on Github:</b><br/><br/>"
+
+    consolidated_list = list(consolidated_list)
+    consolidated_list.sort()
+
     for iter, github_username in enumerate(consolidated_list):
         url = "https://github.com/%s" % github_username
-        text += "%s. [%s %s] <br>" % (iter, url, github_username)
+        text += "%s. [%s %s] <br>" % (iter + 1, url, github_username)
+
+    # Update the page with this markup
+
+    site = pywikibot.Site()
+    page = pywikibot.Page(site, u'MetaKGP_Github_Contributors')
     page.text = text
     page.save(u'Update list of contributors')
 
