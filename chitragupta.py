@@ -39,12 +39,12 @@ def get_all_repos():
     return all_contribs
 
 def main():
-    consolidated_list = get_all_repos()
+    consolidated_set = get_all_repos()
 
     # Build the markup for the page
     text = "<b>List of contributors on Github:</b><br/><br/>"
 
-    consolidated_list = list(consolidated_list)
+    consolidated_list = list(consolidated_set)
     consolidated_list.sort()
 
     for iter, github_username in enumerate(consolidated_list):
