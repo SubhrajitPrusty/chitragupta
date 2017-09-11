@@ -5,7 +5,7 @@ Author : Rameshwar Bhaskaran
 
 import requests
 import json
-#  import pywikibot
+import pywikibot
 import grequests
 
 ignored_repos = set({'git-exercise'})
@@ -22,7 +22,6 @@ def get_all_repos():
         exit(0)
     else:
         repos = json.loads(r.text)
-        repos = repos[:20]
 
         contrib_urls = [repo['contributors_url'] for repo in repos if repo['name'] not in ignored_repos]
 
@@ -52,16 +51,12 @@ def main():
         url = "https://github.com/%s" % github_username
         text += "%s. [%s %s] <br>" % (iter + 1, url, github_username)
 
-    filout = open('test.html', 'w')
-    filout.write(text)
-    filout.close()
-
     # Update the page with this markup
 
-    #  site = pywikibot.Site()
-    #  page = pywikibot.Page(site, u'MetaKGP_Github_Contributors')
-    #  page.text = text
-    #  page.save(u'Update list of contributors')
+    site = pywikibot.Site()
+    page = pywikibot.Page(site, u'MetaKGP_Github_Contributors')
+    page.text = text
+    page.save(u'Update list of contributors')
 
 if __name__ == "__main__":
     main()
