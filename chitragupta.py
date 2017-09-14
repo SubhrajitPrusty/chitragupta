@@ -1,6 +1,9 @@
-""" Chitragupta - The guy who tracks your contributions to the MetaKGP Github organisation!
+""" 
+Chitragupta
 
-Author : Rameshwar Bhaskaran
+> The guy who tracks your contributions to the MetaKGP Github organisation!
+
+Author: Rameshwar Bhaskaran
 """
 
 import requests
@@ -29,10 +32,13 @@ def get_all_repos():
 
         all_resps = grequests.map(all_reqs)
 
-        for resp in all_resps:
-            if resp:
+        for index, resp in enumerate(all_resps):
+            if resp and resp.status_code == 200:
                 repo_contribs = json.loads(resp.text)
                 all_contribs = all_contribs.union([person['login'] for person in repo_contribs])
+            else:
+                print "Request to %s failed. Status code: %s" % \
+                (contrib_urls[index], resp.status_code if resp else None)
 
         print all_contribs
 
