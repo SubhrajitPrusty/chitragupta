@@ -7,6 +7,8 @@
 
 Follow instructions as given [here](https://github.com/metakgp/kakashi)
 
+`pip install -r requirements.txt`
+
 Create a bot account.
 
 `python chitragupta.py`
