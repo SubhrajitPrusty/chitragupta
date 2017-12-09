@@ -13,6 +13,13 @@ Create a bot account.
 
 `python chitragupta.py`
 
+### To run bot daily
+
+In the terminal type `crontab -e`
+Add this line to the end
+
+`0 0 * * * cd /path/to/your/repository/ && python chitragupta.py`
+
 ### TODO
  
  * Pagination support
